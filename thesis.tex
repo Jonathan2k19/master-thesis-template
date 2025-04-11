@@ -1,0 +1,64 @@
+% NOTE: removing \documentclass[draft] hides TODOs etc.
+\documentclass[draft,a4paper,11pt,openany]{book}
+
+% Load packages etc.
+\input{header}
+\tolerance=200
+
+% Details
+\settitle{My Title}
+\setauthor{My Name}
+\setauthormail{author@example.com}
+\advisor{My Advisor}
+\reviewerOne{First Reviewer}
+\reviewerTwo{Second Reviewer}
+\university{Saarland University}
+\faculty{\\
+	Faculty of Mathematics and Computer Science\\
+	Department of Computer Science
+}
+\thesistype{Master's}
+\subdate{03\textsuperscript{rd}}{August}{2023}
+\city{Saarbrücken}
+
+% Roman page numbers prior to first chapter, then Arabic
+\pagenumbering{roman}
+
+\begin{document}
+
+% Title and statements page
+\thispagestyle{empty}
+\maketitlepage
+\makestatementpage
+
+% Abstract and acknowledgements
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{\numberline{}Abstract}
+\input{chapters/abstract}
+\newpage
+\chapter*{Acknowledgements}
+\input{chapters/acknowledgements}
+
+% List of *
+\listoftodos
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Chapters
+\addtocontents{toc}{\vspace{5mm}}
+\clearpage
+\pagenumbering{arabic}
+\include{chapters/chapter1}
+\addtocontents{toc}{\vspace{5mm}}
+
+% Appendix
+\appendix
+\include{chapters/appendix}
+
+% Bibliography
+\renewcommand*{\bibfont}{\normalfont\small}
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}

@@ -1,0 +1,284 @@
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UTF-8 encoding (e.g. to use Ä instead of \"A)
+\usepackage[utf8]{inputenc}
+
+% Title section
+\usepackage[small,compact]{titlesec}
+
+% Add bibliography section to TOC
+\usepackage[nottoc]{tocbibind}
+
+% To use \verb inside another command (if \texttt won't do)
+% Usage: \cprotect\the_other_command{\verb$...$}
+\usepackage{cprotect}
+
+% To include figures with path relative to figures/.
+\usepackage{graphicx}
+\graphicspath{ {./figures/} }
+
+% Subfigure support
+\usepackage{caption}
+\usepackage{subcaption}
+% NOTE: if you want you can change the format of captions:
+%\captionsetup{font=small, labelfont=bf, labelsep=space}
+
+% To make math symbols etc. work
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools} % xleftrightarrow etc.
+
+% Unstyled links
+\usepackage[hidelinks, draft=false]{hyperref}
+
+% Reference figures, sections, etc. with e.g. \Cref{fig:foo}
+% instead of Figure~\ref{fig:foo}.
+\usepackage{cleveref}
+
+% To place figures next to text
+% Usage: \begin{wrapfigure}[42]{r}{0.2\textwidth} ... \end{wrapfigure}
+\usepackage{wrapfig}
+
+% British-English language support (where to split words, etc.)
+\usepackage[english]{babel}
+
+% Don't indent start of new paragraph
+\usepackage{parskip}
+
+% Dummy text. Usage: \blindtext
+\usepackage{blindtext}
+
+% Better looks
+\usepackage{microtype}
+
+% Position footnotes at the very bottom of a page.
+% Reset the counter with each page.
+\usepackage[bottom, perpage]{footmisc}
+
+% Don't split footnotes across pages (https://texfaq.org/FAQ-splitfoot)
+\interfootnotelinepenalty=10000
+
+% To use \verb inside another command (if \texttt won't do)
+% Usage: \cprotect\the_other_command{\verb$...$}
+\usepackage{cprotect}
+
+% Use straight quotes inside verbatim and lstlisting. Without it, a
+% single quote is some weird unicode character which makes it
+% harder to copy-paste snippets.
+\usepackage{upquote}
+
+% Flexible citation style
+\usepackage[sort]{natbib}
+\bibpunct{[}{]}{,}{n}{,}{;}
+\renewcommand{\cite}{\citep}
+
+% Code snippet style
+\usepackage[final]{listings}
+\usepackage{lstautogobble}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}   % RGB: [0, 255], rgb: [0, 1]
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{gray},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=none, % NOTE: if you want numbers: numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    columns=flexible,
+    % left-align code i.e. remove outer-most indentation:
+    autogobble=true,
+    % Note: Uncomment to frame the listing:
+    %frame=single,
+    % Note: Uncomment to (roughly) align line numbers with left text border:
+    %numbersep=1em,
+    %xleftmargin=1em
+}
+\lstset{style=mystyle}
+
+% TODOs
+\usepackage[obeyDraft,textsize=tiny]{todonotes}
+\setlength{\marginparwidth}{3cm}
+
+% Font
+\usepackage[T1]{fontenc}
+\usepackage{tgpagella}
+\usepackage[euler-digits,small]{eulervm}
+\linespread{1.025}              % Palatino leads a little more leading
+\DeclareTextFontCommand{\emph}{\itshape}
+
+% Header
+% L=Left, R=Right, E=Even, O=Odd
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+%\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{ \nouppercase{\leftmark}} }
+\fancyhead[LO]{\textit{ \nouppercase{\rightmark}} }
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+% Geometry
+\usepackage{geometry}
+\newdimen\lines
+\setbox\@tempboxa\hbox{(Programmierung)}
+\lines=\ht\@tempboxa
+\advance\lines by\dp\@tempboxa
+\newlength{\exb}
+\settowidth{\exb}{\normalfont x}
+\geometry{
+    a4paper,
+    includehead,% (=> head is part of total body)
+    ignorefoot,% (=> foot is not part of total body)
+    top=3cm,% (top of paper |---| top of total body)
+    totalwidth=70\exb,% (width of total body)
+    totalheight=215mm,% (height of total body)
+    headheight=1\lines,
+    headsep=2.5\lines,
+    foot=4\lines,% (bottom of text body |---| _bottom_ of foot)
+    hcentering
+}
+\setlength{\headheight}{15pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\setauthor}[1]{\author{#1}\def\theauthor{#1}}
+\newcommand{\setauthormail}[1]{\def\theauthormail{#1}}
+\newcommand{\settitle}[1]{\title{#1}\def\thetitle{#1}}
+\newcommand{\advisor}[1]{\def\theadvisor{#1}}
+\newcommand{\reviewerOne}[1]{\def\thereviewerOne{#1}}
+\newcommand{\reviewerTwo}[1]{\def\thereviewerTwo{#1}}
+\newcommand{\university}[1]{\def\theuniversity{#1}}
+\newcommand{\faculty}[1]{\def\thefaculty{#1}}
+\newcommand{\thesistype}[1]{\def\thethesistype{#1}}
+\newcommand{\subdate}[3]{\def\thesubday{#1} \def\thesubmonth{#2} \def\thesubyear{#3} }
+\newcommand{\submissionDate}{\thesubday~\thesubmonth~\thesubyear}
+\newcommand{\city}[1]{\def\thecity{#1}}
+
+\newcommand{\maketitlepage}{
+    \begin{titlepage}
+        \begin{center}
+        \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+        % Uni, Faculty
+        \begin{minipage}{0.2\textwidth}
+            \includegraphics[draft=false,width=0.9\textwidth]{logo.eps}
+        \end{minipage}
+        \begin{minipage}{0.7\textwidth}
+            \centering \textsc{{\Huge \theuniversity}}
+            
+            \centering \textsc{\footnotesize \thefaculty}
+        \end{minipage}
+        \vspace{1cm}
+
+        \textsc{\thethesistype ~Thesis}\\[0.3cm]
+
+        % Title
+        \HRule \\[0.4cm]
+        { \Huge \scshape \thetitle \\[0.4cm] }
+
+        \HRule \\[1.5cm]
+
+        % Author, supervisor
+        \noindent
+        \begin{minipage}[t]{0.6\textwidth}
+            \begin{flushleft} \Large
+            \textbf{Author}\\
+            \href{mailto:\theauthormail}{\theauthor}\\
+            \end{flushleft}
+        \end{minipage}%
+        \begin{minipage}[t]{0.3\textwidth}
+            \begin{flushright} \Large
+            \textbf{Advisor} \\
+            \theadvisor
+            \end{flushright}
+        \end{minipage}
+
+        % Reviewers
+        \noindent
+        \begin{minipage}{1\textwidth}
+            \vspace{4cm}
+            \begin{center} \large
+            \textbf{Reviewers} \\
+            \thereviewerOne\\
+            \thereviewerTwo
+            \end{center}
+        \end{minipage}
+
+        \vfill
+
+        % Date of submission
+        {\large Submitted: \submissionDate}
+
+        \end{center}
+    \end{titlepage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statement Page
+% https://www.ps-mint.uni-saarland.de/templates/selbstaendigkeitserklaerung_in_arbeit_102016.pdf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\makestatementpage}{
+    ~ \vspace*{2cm} ~
+
+    \textbf{Eidesstattliche Erklärung}
+
+    Ich erkläre hiermit an Eides statt, dass ich die vorliegende Arbeit
+    selbstständig verfasst und keine anderen als die angegebenen Quellen und
+    Hilfsmittel verwendet habe.
+
+    \textbf{Statement in Lieu of an Oath}
+
+    I hereby confirm that I have written this thesis on my own and that I
+    have not used any other media or materials than the ones referred to in
+    this thesis.
+
+    ~ \vspace{3cm} ~
+
+    \textbf{Einverständniserklärung}
+
+    Ich bin damit einverstanden, dass meine (bestandene) Arbeit in beiden
+    Versionen in die Bibliothek der Informatik aufgenommen und damit
+    veröffentlicht wird.
+
+    \textbf{Declaration of Consent}
+
+    I agree to make both versions of my thesis (with a passing grade)
+    accessible to the public by having them added to the library of the
+    Computer Science Department.
+
+    \vfill
+
+    % Date, signature
+    \begin{minipage}[t]{0.5\textwidth} \large
+        \thecity, \submissionDate
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[t]{0.4\textwidth} \large
+        \rule{\linewidth}{0.2mm}
+        \vspace*{2mm}
+        (Unterschrift/Signature)
+    \end{minipage}
+
+    \newpage
+}
+
+\makeatother

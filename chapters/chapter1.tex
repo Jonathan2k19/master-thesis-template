@@ -1,0 +1,90 @@
+\chapter{Introduction}
+
+\blindtext
+
+Some citation right here \cite{shannon2001} and here \cite{rfc4291,
+ripeBestPractice}.
+
+An \emph{emphasis}.
+
+\section{Some Section}
+\blindtext
+
+\begin{description}
+\item[serif] Test Test
+\item[sans serif] \textsf{Test Test}
+\item[typewriter] \texttt{Test Test}
+\item[math] $a^2+b^2= c^2$
+\end{description}
+
+Here comes a list:
+\begin{itemize}
+    \item This
+    \item is
+    \item a
+    \begin{itemize}
+        \item nested
+    \end{itemize}
+    \item list 
+\end{itemize}
+
+\todo{Some TODO}
+
+\subsection{Some Subsection}
+\blindtext
+
+Here comes a table
+\begin{table}[h!]
+    \begin{tabular}{ l l }
+    a & b \\ 
+    c & d
+    \end{tabular}
+    \centering
+    \caption[My table -- short description]{My table -- long description}
+\end{table}
+
+Some figure:
+\begin{figure}[h]
+  \centering
+  \includegraphics[draft=false,width=0.4\textwidth]{acknowledgements.png}
+  \caption[Short caption for list of figures]{A longer, more detailed
+  description of the figure.}
+  \label{fig:acknowledgements}
+\end{figure}
+
+A few figures
+\begin{figure}[htb!]
+    \center
+    \begin{subfigure}{.4\textwidth}
+        \center
+        \includegraphics[draft=false,width=\textwidth]{acknowledgements.png}
+        \caption{With \texttt{[draft=false]}.}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \center
+        \includegraphics[width=\textwidth]{acknowledgements.png}
+        \caption{Without \texttt{[draft=false]}.}
+    \end{subfigure}
+    \cprotect\caption[Subfigure showcase]{
+        The impact of \verb$\includegraphics[draft=false]$ on the rendering of
+        figures if \verb$\documentclass[draft]$ is set.
+    }
+\end{figure}
+
+
+Some inline code snippet
+\begin{lstlisting}[language=Python]
+    def foo():
+        # some comment
+        return bar
+\end{lstlisting}
+
+Some numbered and partially framed code snippet loaded from a file
+\lstinputlisting[language=C, frame=bottom, numbers=left]{code/snippet.c}
+
+Here comes display math
+\[
+    \sum_{i=1}^N{x_i}
+\]
+
+And a bit of inline math \(a^2 + b^2 = c^2\).
